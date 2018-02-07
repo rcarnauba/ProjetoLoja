@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProdutoService } from '../../services/produto.service';
+import { Produto } from '../../classes/produto';
 
 @Component({
   selector: 'app-vitrine',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vitrine.component.scss']
 })
 export class VitrineComponent implements OnInit {
-
-  constructor() { }
+  produtos: Produto[] = [];
+  constructor(private produtoService : ProdutoService) { }
 
   ngOnInit() {
-  }
+    this.listarProdutos();
+   }
 
+ listarProdutos() {
+   console.log("passoi");
+        this.produtoService.getAll()
+        .subscribe(produtos => { this.produtos = produtos; });
+    }
 }
